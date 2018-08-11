@@ -1,5 +1,7 @@
 package br.com.sayurisales.pokedex
 
+
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -14,7 +16,13 @@ class ListaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lista)
 
         rvPokemons.adapter = ListaPokemonAdapter(getPokemons(),
-                this, {pokemon -> Toast.makeText(this, pokemon.nome, Toast.LENGTH_LONG).show()})
+                this, {
+            //pokemon -> Toast.makeText(this, pokemon.nome, Toast.LENGTH_LONG).show()
+            val telaDetalhe = Intent (this,DetalheActivity::class.java)
+            
+            telaDetalhe.putExtra("POKEMON", it)
+            startActivity(telaDetalhe)
+        })
 
         rvPokemons.layoutManager = LinearLayoutManager (this)
     }
